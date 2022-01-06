@@ -1,0 +1,11 @@
+.app-header {
+  padding: 1rem 0;
+  background-color: $black;
+  color: $white;
+
+  &__logo {
+    color: $red;
+    text-decoration: none;
+    font-size: 2rem;
+  }
+}
