@@ -1,0 +1,20 @@
+.app-nav {
+  display: flex;
+
+  &__link {
+    color: $white;
+    text-decoration: none;
+    font-size: 1rem;
+    opacity: 0.8;
+    transition: opacity ease-out 0.2s;
+
+    &:not(:last-child) {
+      margin-right: 1rem;
+    }
+
+    &:hover,
+    &.router-link-active {
+      opacity: 1;
+    }
+  }
+}

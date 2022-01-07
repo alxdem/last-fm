@@ -10,16 +10,19 @@ export default {
   data() {
     return {
       artists: [],
+      isListLoading: true,
     };
   },
   methods: {
     async getAllArtists() {
-      const res = await api.getTopAlbums('scorpions');
+      const res = await api.getTopArtists(15);
+      // const res = await api.getTopAlbums('scorpions');
 
       console.log('res', res);
 
-      this.artists = await res.topalbums.album || [];
-      // this.artists = await res.topartists.artist || [];
+      // this.artists = await res.topalbums.album || [];
+      this.artists = await res.topartists.artist || [];
+      this.isListLoading = false;
     },
   },
   created() {
@@ -29,7 +32,12 @@ export default {
 </script>
 
 <template>
-  <main-tile
-    :list="artists"
-  />
+  <div class="home">
+    <div class="home__tile">
+      <main-tile
+        :list="artists"
+        :isLoading="isListLoading"
+      />
+    </div>
+  </div>
 </template>

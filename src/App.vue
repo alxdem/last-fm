@@ -1,13 +1,3 @@
-<template>
-  <app-header></app-header>
-  <div class="nav">
-    <router-link to="/">Home</router-link>
-    <router-link to="/about">About</router-link>
-  </div>
-
-  <router-view/>
-</template>
-
 <script>
 import AppHeader from './components/AppHeader.vue';
 
@@ -18,6 +8,12 @@ export default {
   },
 };
 </script>
+
+<template>
+  <app-header></app-header>
+
+  <router-view/>
+</template>
 
 <style lang="scss">
   .html {
