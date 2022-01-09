@@ -36,18 +36,18 @@ export default {
 </script>
 
 <template>
-  <div class="main-tile">
-    <div v-if="isLoading" class="main-tile__preloader">
+  <div class="albums-tile">
+    <div v-if="isLoading" class="albums-tile__preloader">
       <app-preloader/>
     </div>
-    <div v-else class="main-tile__list">
-      <div v-for="item in list" :key="item.mbid" class="main-tile__item">
+    <div v-else class="albums-tile__list">
+      <div v-for="item in list" :key="item.mbid" class="albums-tile__item">
         <router-link
-          class="main-tile__card" to="/"
+          class="albums-tile__card" to="/"
           :style="`background-image: url(${imageSet(item.image)})`"
         >
-          <div v-if="item.name" class="main-tile__title">{{ item.name }}</div>
-          <div v-if="item.listeners" class="main-tile__listeners">{{ item.listeners }}</div>
+          <div v-if="item.name" class="albums-tile__title">{{ item.name }}</div>
+          <div v-if="item.listeners" class="albums-tile__listeners">{{ item.listeners }}</div>
         </router-link>
       </div>
     </div>

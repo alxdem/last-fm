@@ -6,4 +6,24 @@
     font-size: 3rem;
     margin-bottom: 1.5rem;
   }
+
+  &__scrobbles {
+    margin-top: 0.4rem;
+  }
+
+  &__text {
+    margin-top: 2.5rem;
+
+    a {
+      color: $white;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+
+  &__albums-list {
+    margin-top: 2rem;
+  }
 }
