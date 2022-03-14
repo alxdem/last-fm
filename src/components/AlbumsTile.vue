@@ -1,5 +1,6 @@
 <script>
 import AppPreloader from './AppPreloader.vue';
+import utils from '../utils/utils';
 
 export default {
   name: 'MainTile',
@@ -16,20 +17,17 @@ export default {
     };
   },
   methods: {
-    imageSet(array) {
-      let lg;
-      let extraLg;
-
-      array.forEach((item) => {
-        if (item.size === 'large') {
-          lg = item['#text'];
-        }
-
-        if (item.size === 'extralarge') {
-          extraLg = item['#text'];
-        }
-      });
-      return extraLg || lg;
+    urlFormatted(info) {
+      return {
+        name: 'Album',
+        params: {
+          artist: utils.formattUrl(info.artist.name),
+          album: utils.formattUrl(info.name),
+        },
+      };
+    },
+    imageUrlSet(array) {
+      return utils.imageSet(array);
     },
   },
 };
@@ -43,8 +41,9 @@ export default {
     <div v-else class="albums-tile__list">
       <div v-for="item in list" :key="item.mbid" class="albums-tile__item">
         <router-link
-          class="albums-tile__card" to="/"
-          :style="`background-image: url(${imageSet(item.image)})`"
+          class="albums-tile__card"
+          :to="urlFormatted(item)"
+          :style="`background-image: url(${imageUrlSet(item.image)})`"
         >
           <div v-if="item.name" class="albums-tile__title">{{ item.name }}</div>
           <div v-if="item.listeners" class="albums-tile__listeners">{{ item.listeners }}</div>

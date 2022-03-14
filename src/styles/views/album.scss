@@ -1,0 +1,166 @@
+.album {
+  padding-top: 3.5rem;
+  color: $white;
+
+  &__header {
+    display: flex;
+    align-items: center;
+  }
+
+  &__info {
+    margin-left: 20px;
+  }
+
+  &__title {
+    font-size: 3rem;
+  }
+
+  &__photo {
+    width: 300px;
+    flex-shrink: 0;
+    perspective: 600px;
+  }
+
+  &__image {
+    display: block;
+    transform: rotateY(34deg);
+  }
+
+  &__no-image {
+    color: $gray_700;
+    width: 300px;
+    height: 300px;
+    transform: rotateY(34deg);
+
+    svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__back {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: $gray_200;
+    margin-bottom: 0.8rem;
+    transition: color ease-out 0.2s;
+
+    &:hover {
+      color: $white;
+    }
+  }
+
+  &__back-icon {
+    flex-shrink: 0;
+    width: 1.3rem;
+    height: 1.3rem;
+    margin-right: 0.5rem;
+  }
+
+  &__back-text {
+    font-size: 1.3rem;
+  }
+
+  &__body {
+    margin-top: 20px;
+    padding-bottom: 80px;
+  }
+
+  &__list {
+    list-style: none;
+    padding-left: 320px;
+    position: relative;
+    margin: 0;
+  }
+
+  &__item {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all ease-out 0.3s;
+
+    &:not(:last-child) {
+      margin-bottom: 18px;
+    }
+
+    &_active {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    &_empty {
+      display: none;
+    }
+  }
+
+  &__item-name {
+    font-size: 22px;
+    color: $gray_200;
+  }
+
+  &__no-result {
+    padding-left: 320px;
+    font-size: 20px;
+    color: $gray_200;
+  }
+}
+
+.album-enter-from,
+.album-leave-to {
+  opacity: 0;
+  transform: translateX(70%);
+}
+
+.album-enter-active,
+.album-leave-active {
+  transition: all 1s ease-out 0.3s;
+}
+
+.album-enter-to {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.photo-enter-from {
+  opacity: 0;
+  transform: translateX(60vw);
+}
+
+.photo-enter-active {
+  transition: all 0.9s ease-out 0.1s;
+}
+
+.photo-enter-to {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.back-enter-from,
+.bach-leave-to {
+  opacity: 0;
+  transform: translateX(10vw);
+}
+
+.back-enter-active {
+  transition: all 0.7s ease-out 0.9s;
+}
+
+.back-enter-to {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.title-enter-from {
+  opacity: 0;
+  transform: translateX(10vw);
+}
+
+.title-enter-active {
+  transition: all 0.7s ease-out 0.7s;
+}
+
+.title-enter-to {
+  opacity: 1;
+  transform: translateX(0);
+}

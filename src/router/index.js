@@ -17,6 +17,11 @@ const routes = [
     name: 'Artist',
     component: () => import('../views/Artist.vue'),
   },
+  {
+    path: '/:artist/:album',
+    name: 'Album',
+    component: () => import('../views/Album.vue'),
+  },
 ];
 
 const router = createRouter({

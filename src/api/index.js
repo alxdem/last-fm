@@ -49,9 +49,23 @@ async function getArtistAlbums(name) {
   return data;
 }
 
+async function getAlbum(artistName, album) {
+  if (!artistName || !album) return false;
+
+  const res = await fetch(`http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=${apiKey}&artist=${artistName}&album=${album}&format=json`);
+  let data;
+
+  if (res.ok) {
+    data = await res.json();
+  }
+
+  return data;
+}
+
 api.getTopArtists = getTopArtists;
 api.getTopAlbums = getTopAlbums;
 api.getArtistInfo = getArtistInfo;
 api.getArtistAlbums = getArtistAlbums;
+api.getAlbum = getAlbum;
 
 export default api;
