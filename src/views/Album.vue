@@ -58,13 +58,54 @@ export default {
       el.classList.remove('album__item_active');
     },
     listEnter(el) {
-      console.log('el.dataset.index', el.dataset.index);
+      console.log('listEnter');
       setTimeout(() => {
         el.classList.add('album__item_active');
       }, this.getListTimeout(el.dataset.index));
     },
-    listLeave(el) {
+    listAfterEnter() {
+
+    },
+    listBeforeLeave(el, done) {
+      console.log('listBeforeLeave el', el);
+      console.log('listBeforeLeave done', done);
+
+      // done();
+    },
+    listLeave(el, done) {
+      console.log('listLeave', el);
+      // el.classList.remove('album__item_active');
+      // setTimeout(() => {
+      //   el.classList.remove('album__item_active');
+      //   done();
+      // }, this.getListTimeout(el.dataset.index));
+
+      done();
+    },
+    listAfterLeave(el) {
       el.classList.remove('album__item_active');
+    },
+    btnBackClick() {
+      if (!this.tracks) {
+        this.isLoaded = false;
+        setTimeout(() => {
+          this.$router.push(this.backUrlGet);
+        }, 1600);
+
+        return;
+      }
+
+      const intervalId = setInterval(() => {
+        if (this.tracks.length) {
+          this.tracks.pop();
+        } else {
+          this.isLoaded = false;
+          setTimeout(() => {
+            this.$router.push(this.backUrlGet);
+          }, 1600);
+          clearInterval(intervalId);
+        }
+      }, 60);
     },
   },
   created() {
@@ -76,48 +117,48 @@ export default {
 <template>
   <div class="album">
     <div class="album__wrapper wrapper">
-<!--      <transition name="album">-->
-        <div class="album__header">
-          <transition name="photo">
-            <div class="album__photo" v-if="isLoaded">
-              <img v-if="imageUrlSet(image)" class="album__image" :src="imageUrlSet(image)" alt="">
-              <app-icon v-else class="album__no-image" name="no-image"/>
-            </div>
+      <div class="album__header">
+        <transition name="photo">
+          <div class="album__photo" v-if="isLoaded">
+            <img v-if="imageUrlSet(image)" class="album__image" :src="imageUrlSet(image)" alt="">
+            <app-icon v-else class="album__no-image" name="no-image"/>
+          </div>
+        </transition>
+
+        <div class="album__info">
+          <transition name="back">
+            <a
+              v-if="isLoaded"
+              class="album__back"
+              @click.prevent="btnBackClick"
+            >
+              <app-icon class="album__back-icon" name="arrow"/>
+              <div v-if="artist" class="album__back-text">{{ artist }}</div>
+            </a>
           </transition>
 
-          <div class="album__info">
-            <transition name="back">
-              <router-link
-                v-if="isLoaded"
-                class="album__back"
-                :to="backUrlGet"
-              >
-                <app-icon class="album__back-icon" name="arrow"/>
-                <div v-if="artist" class="album__back-text">{{ artist }}</div>
-              </router-link>
-            </transition>
-
-            <transition name="title">
-              <div v-if="title" class="album__title">{{ title }}</div>
-            </transition>
-          </div>
+          <transition name="title">
+            <div v-if="title && isLoaded" class="album__title">{{ title }}</div>
+          </transition>
         </div>
-<!--      </transition>-->
+      </div>
 
       <div class="album__body">
-<!--        <div class="album__list" v-if="tracks && tracks.length">-->
-        <div class="album__list">
+        <div class="album__wrapper" v-if="tracks && tracks.length && isLoaded">
           <transition-group
-            name="list"
+            class="album__list"
             tag="ul"
-            :css="false"
+            appear
             @before-enter="listBeforeEnter"
             @enter="listEnter"
+            @after-enter="listAfterEnter"
+            @before-leave="listBeforeLeave"
             @leave="listLeave"
+            @after-leave="listAfterLeave"
           >
             <li v-for="(track, index) in tracks"
                 :key="track.name"
-                :data-index="track.name ? index: 1"
+                :data-index="track.name ? index : 1"
                 class="album__item"
                 :class="{'album__item_empty': !track.name}"
             >
@@ -126,7 +167,7 @@ export default {
           </transition-group>
         </div>
 
-<!--        <p v-else class="album__no-result">Список треков недоступен</p>-->
+        <p v-else-if="isLoaded" class="album__no-result">Список треков недоступен</p>
       </div>
     </div>
   </div>

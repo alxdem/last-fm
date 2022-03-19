@@ -10,7 +10,7 @@ export default {
   data() {
     return {
       title: '',
-      listeners: '',
+      listeners: 0,
       scrobbles: '',
       text: '',
       albums: [],
@@ -28,8 +28,8 @@ export default {
       const info = res.artist;
       if (info) {
         this.title = info.name;
-        this.listeners = info.stats.listeners;
-        this.scrobbles = info.stats.playcount;
+        this.listeners = this.numberFormat(info.stats.listeners);
+        this.scrobbles = this.numberFormat(info.stats.playcount);
         this.text = info.bio.summary;
       }
       this.isListLoading = false;
@@ -38,8 +38,9 @@ export default {
       const res = await api.getArtistAlbums(artistName);
       const info = res.topalbums && res.topalbums;
       this.albums = info.album;
-
-      console.log('info', info);
+    },
+    numberFormat(value) {
+      return Number(value).toLocaleString();
     },
   },
   created() {

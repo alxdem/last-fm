@@ -7,12 +7,22 @@
     margin-bottom: 1.5rem;
   }
 
+  &__listeners {
+    font-family: $ff-extra;
+    color: $gray_200;
+    font-size: 0.9rem;
+  }
+
   &__scrobbles {
     margin-top: 0.4rem;
+    font-family: $ff-extra;
+    color: $gray_200;
+    font-size: 0.9rem;
   }
 
   &__text {
     margin-top: 2.5rem;
+    color: $gray_200;
 
     a {
       color: $white;
