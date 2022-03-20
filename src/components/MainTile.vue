@@ -28,7 +28,7 @@ export default {
 <template>
   <div class="main-tile">
     <div v-if="isLoading" class="main-tile__preloader">
-      <app-preloader/>
+      <app-preloader class="app-preloader_black"/>
     </div>
     <div v-else class="main-tile__list">
       <div v-for="item in list" :key="item.mbid" class="main-tile__item">

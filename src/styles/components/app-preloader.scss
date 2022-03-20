@@ -8,4 +8,14 @@
   left: 0;
   top: 0;
   background-color: $white;
+
+  &_black {
+    background-color: $black;
+  }
+
+  &__svg {
+    .app-preloader_black & {
+      color: $gray_800;
+    }
+  }
 }

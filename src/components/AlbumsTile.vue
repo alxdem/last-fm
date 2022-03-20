@@ -1,11 +1,13 @@
 <script>
 import AppPreloader from './AppPreloader.vue';
+import AlbumCard from './AlbumCard.vue';
 import utils from '../utils/utils';
 
 export default {
   name: 'MainTile',
   components: {
     AppPreloader,
+    AlbumCard,
   },
   props: {
     list: Array,
@@ -26,9 +28,6 @@ export default {
         },
       };
     },
-    imageUrlSet(array) {
-      return utils.imageSet(array);
-    },
   },
 };
 </script>
@@ -40,14 +39,12 @@ export default {
     </div>
     <div v-else class="albums-tile__list">
       <div v-for="item in list" :key="item.mbid" class="albums-tile__item">
-        <router-link
-          class="albums-tile__card"
-          :to="urlFormatted(item)"
-          :style="`background-image: url(${imageUrlSet(item.image)})`"
-        >
-          <div v-if="item.name" class="albums-tile__title">{{ item.name }}</div>
-          <div v-if="item.listeners" class="albums-tile__listeners">{{ item.listeners }}</div>
-        </router-link>
+        <album-card
+          :image="item.image"
+          :route-to="urlFormatted(item)"
+          :name="item.name"
+          :listeners="item.listeners"
+        />
       </div>
     </div>
   </div>
