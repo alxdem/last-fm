@@ -58,7 +58,6 @@ export default {
       el.classList.remove('album__item_active');
     },
     listEnter(el) {
-      console.log('listEnter');
       setTimeout(() => {
         el.classList.add('album__item_active');
       }, this.getListTimeout(el.dataset.index));
