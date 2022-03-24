@@ -52,7 +52,7 @@ async function getArtistAlbums(name) {
 async function getAlbum(artistName, album) {
   if (!artistName || !album) return false;
 
-  const res = await fetch(`http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=${apiKey}&artist=${artistName}&album=${album}&format=json`);
+  const res = await fetch(`https://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=${apiKey}&artist=${artistName}&album=${album}&format=json`);
   let data;
 
   if (res.ok) {
